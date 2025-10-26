@@ -36,7 +36,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   margin: 0;
-  overflow-x: hidden; /* Prevent stray horizontal scrollbars */
+  overflow-x: hidden; /* prevent stray horizontal scrollbars on mobile */
 }
 
 .bg-body { background-color: var(--bg-body); }
@@ -46,6 +46,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem 1rem;
+  box-sizing: border-box;
 }
 
 .header {
@@ -119,17 +120,16 @@ body {
     text-align: right;
   }
 }
-.pickup-line {
-  color: var(--text-mid);
-}
-.pickup-note {
-  color: var(--text-dim);
-}
+.pickup-line { color: var(--text-mid); }
+.pickup-note { color: var(--text-dim); }
 
 .main-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 @media(min-width:1024px){
   .main-grid {
@@ -197,6 +197,8 @@ body {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
   padding: 1.25rem 1.25rem 1rem;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .photo-placeholder {
@@ -213,6 +215,8 @@ body {
   justify-content:center;
   text-align:center;
   line-height:1.4;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 .photo-hint {
   font-size: var(--fs-10);
@@ -226,6 +230,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: .5rem;
+  min-width: 0;
 }
 .card-title {
   color: var(--text-main);
@@ -269,7 +274,7 @@ body {
   font-style: italic;
 }
 
-.full { width:100%; display:block; text-align:center; }
+.full { width:100%; display:block; text-align:center; max-width:100%; box-sizing:border-box; }
 
 .btn-primary {
   background-color: #f2f2f2;
@@ -283,6 +288,9 @@ body {
   text-decoration:none;
   box-shadow: var(--shadow-btn);
   transition: background-color .12s;
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 .btn-primary:hover {
   background-color:#fff;
@@ -299,7 +307,12 @@ body {
   cursor:pointer;
   text-decoration:none;
   box-shadow: var(--shadow-btn);
-  display:inline-block;
+  display:block;
+  text-align:center;
+  white-space: normal;
+  word-break: break-word;
+  box-sizing: border-box;
+  max-width:100%;
 }
 .btn-secondary.full {
   width:100%;
@@ -330,6 +343,8 @@ body {
   transition: background-color .12s;
   white-space: normal;
   word-break: break-word;
+  box-sizing: border-box;
+  max-width:100%;
 }
 .btn-checkout:hover {
   background-color:#76ffa0;
@@ -360,6 +375,9 @@ body {
   display:flex;
   flex-direction:column;
   gap:.25rem;
+  min-width: 0;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 .window-name {
   color:var(--text-main);
@@ -381,7 +399,7 @@ body {
   display:none;
 }
 
-/* info / contact blocks */
+/* info / delivery / toast block */
 .info-block {
   background-color: var(--bg-card);
   border:1px solid var(--border-color);
@@ -395,6 +413,8 @@ body {
   flex-direction:column;
   gap:.5rem;
   margin-top:1rem;
+  box-sizing: border-box;
+  max-width:100%;
 }
 .info-head {
   color:var(--text-main);
@@ -411,6 +431,29 @@ body {
   line-height:1.4;
 }
 
+/* inset wrapper for Toast CTA so the pill button doesn't "burst" out of the card radius */
+.toast-action {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  border-radius: var(--radius-lg);
+}
+.toast-action .btn-secondary.full {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-color: var(--border-color);
+  background-color: var(--bg-accent);
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
 .contact-card {
   background-color: rgba(17,17,17,0.8);
   border:1px solid var(--border-color);
@@ -420,6 +463,8 @@ body {
   display:flex;
   flex-direction:column;
   gap:1rem;
+  box-sizing: border-box;
+  max-width:100%;
 }
 .form-field {
   display:flex;
@@ -440,6 +485,8 @@ body {
   padding:.6rem .75rem;
   line-height:1.4;
   font-family:inherit;
+  box-sizing: border-box;
+  max-width:100%;
 }
 .textarea {
   resize:vertical;
@@ -456,11 +503,13 @@ body {
   display:flex;
   flex-direction:column;
   gap:2rem;
+  min-width: 0;
 }
 
 /* cart column */
 .cart-col {
   position:relative;
+  max-width:100%;
 }
 @media(min-width:1024px){
   .cart-col {
@@ -482,6 +531,7 @@ body {
   max-height:none;
   overflow:hidden;
   box-sizing:border-box;
+  max-width:100%;
 }
 .cart-card * {
   max-width:100%;
@@ -494,6 +544,7 @@ body {
   justify-content:space-between;
   flex-wrap:wrap;
   gap:.5rem;
+  min-width:0;
 }
 .cart-head {
   color:var(--text-main);
@@ -521,6 +572,7 @@ body {
   display:flex;
   justify-content:space-between;
   gap:.75rem;
+  min-width:0;
 }
 .cart-line-title {
   color:var(--text-main);
@@ -570,8 +622,10 @@ body {
     justify-content:space-between;
   }
 }
-.foot-left, .foot-right {
+.foot-left,
+.foot-right {
   line-height:1.4;
+  max-width:100%;
 }
 .foot-brand {
   color:var(--text-mid);
@@ -581,6 +635,7 @@ body {
 .gift-layout {
   display:grid;
   gap:2rem;
+  max-width:100%;
 }
 @media(min-width:1024px){
   .gift-layout {
