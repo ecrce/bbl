@@ -1,3 +1,4 @@
+const CHECKOUT_ENDPOINT = "https://bbl-liart.vercel.app/api/create-checkout";
 const CART_KEY = "ballardBreadLabCart";
 const WINDOW_KEY = "ballardBreadLabPickupWindow";
 
