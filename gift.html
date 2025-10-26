@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ballard bread lab · gift shop</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="script.js"></script>
+</head>
+<body class="bg-body text-body">
+
+<header class="header">
+  <div class="wrap header-inner">
+    <div class="brand-block">
+      <div class="brand-row">
+        <div class="brand-name">ballard bread lab</div>
+        <div class="pill pill-green">gift shop</div>
+      </div>
+      <div class="brand-sub">
+        add-ons for pickup / delivery
+      </div>
+    </div>
+
+    <div class="pickup-loc">
+      <div class="pickup-line">side door · unit 105</div>
+      <div class="pickup-line">5512 17th Ave NW, Seattle, WA 98107</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap gift-layout">
+  <!-- GIFT GRID -->
+  <section class="gift-grid">
+    <div class="block">
+      <h2 class="section-title">
+        gift shop
+        <span class="section-hint">low-key late night gear</span>
+      </h2>
+      <p class="section-desc">
+        Stuff for cold docks, dark walks, and whoever you're feeding.
+        [Unverified] Add these to your Toast order or pickup.
+      </p>
+    </div>
+
+    <div class="card-grid gift-card-grid">
+
+      <!-- Dock Light Keychain -->
+      <article class="card">
+        <div class="card-head-row">
+          <div class="card-title">Dock Light Keychain</div>
+          <div class="card-price">$25 [Unverified]</div>
+        </div>
+        <div class="card-text small">
+          Compact flashlight for late-night pickup walks. [Unverified]
+        </div>
+        <button class="btn-primary full"
+                onclick="addToCart('Dock Light Keychain', 12)">
+          Add to Cart
+        </button>
+      </article>
+      
+
+      <!-- Organic Cotton Socks -->
+      <article class="card">
+        <div class="card-head-row">
+          <div class="card-title">Organic Cotton Socks</div>
+          <div class="card-price">$10 [Unverified]</div>
+        </div>
+        <div class="card-text small">
+          Soft, breathable, no harsh dye. Warm enough for dock nights.
+          [Unverified]
+        </div>
+        <button class="btn-primary full"
+                onclick="addToCart('Organic Cotton Socks', 10)">
+          Add to Cart
+        </button>
+      </article>
+
+      <!-- House Spread Jar -->
+      <article class="card">
+        <div class="card-head-row">
+          <div class="card-title">House Spread Jar</div>
+          <div class="card-price">$6 [Unverified]</div>
+        </div>
+        <div class="card-text small">
+          Rotating dip / oil. [Unverified]
+        </div>
+        <button class="btn-primary full"
+                onclick="addToCart('House Spread Jar', 6)">
+          Add to Cart
+        </button>
+      </article>
+    </div>
+
+    <div class="back-link-row">
+      <a href="index.html" class="btn-secondary">← back to bread</a>
+    </div>
+  </section>
+
+  <!-- CART SIDEBAR -->
+  <aside class="cart-col">
+    <div class="cart-card">
+      <div class="cart-top">
+        <div class="cart-head">Your Order</div>
+        <div class="cart-total">
+          $<span id="cartTotal">0.00</span> [Unverified]
+        </div>
+      </div>
+
+      <div id="cartItems" class="cart-items empty-msg">
+        Cart is empty.
+      </div>
+
+      <a class="btn-checkout"
+         href="YOUR_TOAST_LINK_HERE">
+        Checkout with Toast →
+      </a>
+      <div class="checkout-note">
+        Toast processes payment. [Unverified]
+      </div>
+
+      <a href="index.html" class="btn-primary full alt-btn">
+        choose pickup window
+      </a>
+    </div>
+  </aside>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="foot-left">
+      <div class="foot-brand">ballard bread lab</div>
+      <div>late-night batch bread • waterfront side door</div>
+      <div>not corporate</div>
+    </div>
+    <div class="foot-right">
+      <div>Toast delivery [Unverified]</div>
+      <div>Formspree contact active</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
