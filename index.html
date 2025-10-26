@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ballard bread lab · late night pickup</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="script.js"></script>
+</head>
+<body class="bg-body text-body">
+<header class="header">
+  <div class="wrap header-inner">
+    <div class="brand-block">
+      <div class="brand-row">
+        <div class="brand-name">ballard bread lab</div>
+        <div class="pill pill-green">late night pickup</div>
+      </div>
+      <div class="brand-sub">
+        whole wheat • olive oil • egg • baked to order
+      </div>
+    </div>
+
+    <div class="pickup-loc">
+      <div class="pickup-line">pickup: side door · unit 105</div>
+      <div class="pickup-line">5512 17th Ave NW, Seattle, WA 98107</div>
+      <div class="pickup-note">preorder only [Unverified]</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap main-grid">
+  <!-- LEFT COLUMN -->
+  <section class="main-col">
+
+    <!-- tonight's loaves -->
+    <section id="breads" class="block">
+      <div class="section-head">
+        <h2 class="section-title">
+          tonight's loaves
+          <span class="section-hint">baked per order</span>
+        </h2>
+        <p class="section-desc">
+          Each loaf is mixed, proofed, and baked for your order. Choose a
+          pickup / delivery window and we have it ready ~3 hours later or
+          any later slot tonight. [Unverified]
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- Midnight Herb Loaf -->
+        <article class="card">
+          <div class="photo-placeholder">
+            <div>[photo: herb loaf]</div>
+            <div class="photo-hint">placeholder</div>
+          </div>
+
+          <div class="card-head-row">
+            <div class="card-title">Midnight Herb Loaf</div>
+            <div class="card-price">$8 [Unverified]</div>
+          </div>
+
+          <div class="card-text">
+            Whole wheat + olive oil + egg. Garlic, onion, Italian herbs.
+          </div>
+
+          <div class="card-organic">
+            Made with all organic ingredients. [Unverified]
+          </div>
+
+          <div class="card-ingredients">
+            <div class="ingredients-label">Ingredients</div>
+            <div class="ingredients-list">
+              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar,
+              sea salt, onion powder, garlic powder, Italian herbs
+              (oregano, basil, thyme, rosemary), yeast.
+            </div>
+            <div class="allergen">Contains: Wheat, Egg.</div>
+          </div>
+
+          <button class="btn-primary full"
+                  onclick="addToCart('Midnight Herb Loaf', 8)">
+            Add to Cart
+          </button>
+        </article>
+
+        <!-- Night Chocolate Loaf -->
+        <article class="card">
+          <div class="photo-placeholder">
+            <div>[photo: chocolate loaf]</div>
+            <div class="photo-hint">placeholder</div>
+          </div>
+
+          <div class="card-head-row">
+            <div class="card-title">Night Chocolate Loaf</div>
+            <div class="card-price">$9 [Unverified]</div>
+          </div>
+
+          <div class="card-text">
+            Olive oil, egg, cocoa, vanilla, cinnamon. Soft, not too sweet.
+          </div>
+
+          <div class="card-organic">
+            Made with all organic ingredients. [Unverified]
+          </div>
+
+          <div class="card-ingredients">
+            <div class="ingredients-label">Ingredients</div>
+            <div class="ingredients-list">
+              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar,
+              cocoa powder, cinnamon, vanilla extract, sea salt, yeast.
+            </div>
+            <div class="allergen">Contains: Wheat, Egg.</div>
+          </div>
+
+          <button class="btn-primary full"
+                  onclick="addToCart('Night Chocolate Loaf', 9)">
+            Add to Cart
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- pickup scheduling -->
+    <section id="pickup" class="block">
+      <h2 class="section-title">
+        choose pickup / delivery window
+        <span class="section-hint">[Unverified]</span>
+      </h2>
+      <p class="section-desc">
+        We run rolling handoff windows. Select one:
+      </p>
+
+      <div class="window-grid">
+
+        <label class="window-card">
+          <input type="radio" name="pickupWindow" class="hidden-radio"
+                 value="afternoon" checked
+                 onchange="setPickupWindow('afternoon')"/>
+          <div class="window-name">Afternoon Batch</div>
+          <div class="window-time">3 PM – 4 PM</div>
+          <div class="window-hint">for orders 9 AM–12 PM</div>
+        </label>
+
+        <label class="window-card">
+          <input type="radio" name="pickupWindow" class="hidden-radio"
+                 value="evening"
+                 onchange="setPickupWindow('evening')"/>
+          <div class="window-name">Evening Batch</div>
+          <div class="window-time">6 PM – 7 PM</div>
+          <div class="window-hint">for orders 12 PM–3 PM</div>
+        </label>
+
+        <label class="window-card">
+          <input type="radio" name="pickupWindow" class="hidden-radio"
+                 value="night"
+                 onchange="setPickupWindow('night')"/>
+          <div class="window-name">Night Batch</div>
+          <div class="window-time">9 PM – 10 PM</div>
+          <div class="window-hint">for orders 3 PM–6 PM</div>
+        </label>
+
+        <label class="window-card">
+          <input type="radio" name="pickupWindow" class="hidden-radio"
+                 value="midnight"
+                 onchange="setPickupWindow('midnight')"/>
+          <div class="window-name">Midnight Batch</div>
+          <div class="window-time">12 AM – 1 AM</div>
+          <div class="window-hint">for orders 6 PM–9 PM</div>
+        </label>
+      </div>
+
+      <div class="info-block">
+        <div class="info-head">Pickup Location</div>
+        <div>Side door · Unit 105</div>
+        <div>5512 17th Ave NW, Seattle, WA 98107</div>
+        <div class="info-note">
+          Text on arrival. No walk-ups, preorders only. [Unverified]
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-head">Delivery via Toast</div>
+        <div class="info-body">
+          Want it brought to you instead of pickup? Use Toast.
+        </div>
+        <a class="btn-secondary full"
+           href="YOUR_TOAST_LINK_HERE">
+          Continue in Toast →
+        </a>
+        <div class="info-note">
+          [Unverified] Button will deep link to Toast ordering for Ballard Bread Lab.
+        </div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="contact" class="block">
+      <form action="https://formspree.io/f/your-form-id"
+            method="POST"
+            class="contact-card">
+        <h2 class="section-title no-gap">questions?</h2>
+        <p class="section-desc tight">
+          This form is for Ballard Bread Lab only. Not corporate, not a chain.
+        </p>
+
+        <label class="form-field">
+          <span class="form-label">Name</span>
+          <input class="input" name="name" required placeholder="your name"/>
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">Message</span>
+          <textarea class="input textarea"
+                    name="message"
+                    rows="4"
+                    required
+                    placeholder="ask about ingredients, pickup window, gift stock, etc"></textarea>
+        </label>
+
+        <button class="btn-primary full" type="submit">
+          Send
+        </button>
+
+        <div class="form-foot">
+          Formspree handles this message securely. [Unverified]
+        </div>
+      </form>
+    </section>
+  </section>
+
+  <!-- RIGHT COLUMN / CART -->
+  <aside class="cart-col">
+    <div class="cart-card">
+      <div class="cart-top">
+        <div class="cart-head">Your Order</div>
+        <div class="cart-total">
+          $<span id="cartTotal">0.00</span> [Unverified]
+        </div>
+      </div>
+
+      <div id="cartItems" class="cart-items empty-msg">
+        Cart is empty.
+      </div>
+
+      <a href="gift.html" class="btn-primary full alt-btn">
+        Add gift items
+      </a>
+
+      <a class="btn-checkout"
+         href="YOUR_TOAST_LINK_HERE">
+        Checkout with Toast →
+      </a>
+      <div class="checkout-note">
+        Toast processes payment. [Unverified]
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="foot-left">
+      <div class="foot-brand">ballard bread lab</div>
+      <div>baked-to-order whole wheat loaves</div>
+      <div>side door pickup · unit 105</div>
+      <div>5512 17th Ave NW · Seattle, WA 98107</div>
+    </div>
+    <div class="foot-right">
+      <div>Toast delivery [Unverified]</div>
+      <div>Gift add-ons available</div>
+      <div>Formspree contact active</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
