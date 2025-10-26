@@ -29,6 +29,7 @@
 <main class="wrap main-grid">
   <section class="main-col">
 
+    <!-- breads -->
     <section id="breads" class="block">
       <div class="section-head">
         <h2 class="section-title">tonight’s loaves baked per order</h2>
@@ -38,6 +39,7 @@
       </div>
 
       <div class="card-grid">
+        <!-- Midnight Herb Loaf -->
         <article class="card">
           <div class="photo-placeholder">
             <div>[photo: herb loaf]</div>
@@ -47,18 +49,25 @@
             <div class="card-title">Midnight Herb Loaf</div>
             <div class="card-price">$8</div>
           </div>
-          <div class="card-text">Whole wheat + olive oil + egg. Garlic, onion, Italian herbs.</div>
+          <div class="card-text">
+            Whole wheat + olive oil + egg. Garlic, onion, Italian herbs.
+          </div>
           <div class="card-organic">Made with all organic ingredients.</div>
           <div class="card-ingredients">
             <div class="ingredients-label">Ingredients</div>
             <div class="ingredients-list">
-              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar, sea salt, onion powder, garlic powder, Italian herbs (oregano, basil, thyme, rosemary), yeast.
+              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar, sea salt,
+              onion powder, garlic powder, Italian herbs (oregano, basil, thyme, rosemary),
+              yeast.
             </div>
             <div class="allergen">Contains: Wheat, Egg.</div>
           </div>
-          <button class="btn-primary full" onclick="addToCart('Midnight Herb Loaf', 8)">Add to Cart</button>
+          <button class="btn-primary full" onclick="addToCart('Midnight Herb Loaf', 8)">
+            Add to Cart
+          </button>
         </article>
 
+        <!-- Night Chocolate Loaf -->
         <article class="card">
           <div class="photo-placeholder">
             <div>[photo: chocolate loaf]</div>
@@ -68,36 +77,109 @@
             <div class="card-title">Night Chocolate Loaf</div>
             <div class="card-price">$9</div>
           </div>
-          <div class="card-text">Olive oil, egg, cocoa, vanilla, cinnamon. Soft, not too sweet.</div>
+          <div class="card-text">
+            Olive oil, egg, cocoa, vanilla, cinnamon. Soft, not too sweet.
+          </div>
           <div class="card-organic">Made with all organic ingredients.</div>
           <div class="card-ingredients">
             <div class="ingredients-label">Ingredients</div>
             <div class="ingredients-list">
-              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar, cocoa powder, cinnamon, vanilla extract, sea salt, yeast.
+              Whole-wheat flour, bread flour, water, olive oil, egg, cane sugar,
+              cocoa powder, cinnamon, vanilla extract, sea salt, yeast.
             </div>
             <div class="allergen">Contains: Wheat, Egg.</div>
           </div>
-          <button class="btn-primary full" onclick="addToCart('Night Chocolate Loaf', 9)">Add to Cart</button>
+          <button class="btn-primary full" onclick="addToCart('Night Chocolate Loaf', 9)">
+            Add to Cart
+          </button>
+        </article>
+
+        <!-- Ballard Biscocho -->
+        <article class="card">
+          <div class="photo-placeholder">
+            <div>[photo: biscocho loaf]</div>
+            <div class="photo-hint">placeholder</div>
+          </div>
+          <div class="card-head-row">
+            <div class="card-title">Ballard Biscocho</div>
+            <div class="card-price">$10</div>
+          </div>
+          <div class="card-text">
+            Twice-baked sweet bread with olive oil and cane sugar — crisp edge, soft center.
+          </div>
+          <div class="card-organic">Made with all organic ingredients.</div>
+          <div class="card-ingredients">
+            <div class="ingredients-label">Ingredients</div>
+            <div class="ingredients-list">
+              Whole-wheat flour, bread flour, olive oil, cane sugar, egg, sea salt, yeast,
+              vanilla, cinnamon.
+            </div>
+            <div class="allergen">Contains: Wheat, Egg.</div>
+          </div>
+          <button class="btn-primary full" onclick="addToCart('Ballard Biscocho', 10)">
+            Add to Cart
+          </button>
         </article>
       </div>
     </section>
 
+    <!-- pickup window selector -->
     <section id="pickup" class="block">
       <h2 class="section-title">choose pickup / delivery window</h2>
       <p class="section-desc">Rolling handoff windows, each loaf baked to order:</p>
 
       <div class="window-grid">
-        <label class="window-card"><input type="radio" name="pickupWindow" class="hidden-radio" value="afternoon" checked onchange="setPickupWindow('afternoon')"/>
-          <div class="window-name">Afternoon Batch</div><div class="window-time">3 PM – 4 PM</div><div class="window-hint">for orders 9 AM–12 PM</div>
+        <label class="window-card">
+          <input
+            type="radio"
+            name="pickupWindow"
+            class="hidden-radio"
+            value="afternoon"
+            checked
+            onchange="setPickupWindow('afternoon')"
+          />
+          <div class="window-name">Afternoon Batch</div>
+          <div class="window-time">3 PM – 4 PM</div>
+          <div class="window-hint">for orders 9 AM–12 PM</div>
         </label>
-        <label class="window-card"><input type="radio" name="pickupWindow" class="hidden-radio" value="evening" onchange="setPickupWindow('evening')"/>
-          <div class="window-name">Evening Batch</div><div class="window-time">6 PM – 7 PM</div><div class="window-hint">for orders 12 PM–3 PM</div>
+
+        <label class="window-card">
+          <input
+            type="radio"
+            name="pickupWindow"
+            class="hidden-radio"
+            value="evening"
+            onchange="setPickupWindow('evening')"
+          />
+          <div class="window-name">Evening Batch</div>
+          <div class="window-time">6 PM – 7 PM</div>
+          <div class="window-hint">for orders 12 PM–3 PM</div>
         </label>
-        <label class="window-card"><input type="radio" name="pickupWindow" class="hidden-radio" value="night" onchange="setPickupWindow('night')"/>
-          <div class="window-name">Night Batch</div><div class="window-time">9 PM – 10 PM</div><div class="window-hint">for orders 3 PM–6 PM</div>
+
+        <label class="window-card">
+          <input
+            type="radio"
+            name="pickupWindow"
+            class="hidden-radio"
+            value="night"
+            onchange="setPickupWindow('night')"
+          />
+          <div class="window-name">Night Batch</div>
+          <div class="window-time">9 PM – 10 PM</div>
+          <div class="window-hint">for orders 3 PM–6 PM</div>
         </label>
-        <label class="window-card"><input type="radio" name="pickupWindow" class="hidden-radio" value="midnight" onchange="setPickupWindow('midnight')"/>
-          <div class="window-name">Midnight Batch</div><div class="window-time">12 AM – 1 AM</div><div class="window-hint">for orders 6 PM–9 PM</div>
+
+        <label class="window-card">
+          <input
+            type="radio"
+            name="pickupWindow"
+            class="hidden-radio"
+            value="midnight"
+            onchange="setPickupWindow('midnight')"
+          />
+          <div class="window-name">Midnight Batch</div>
+          <div class="window-time">12 AM – 1 AM</div>
+          <div class="window-hint">for orders 6 PM–9 PM</div>
         </label>
       </div>
 
@@ -109,53 +191,79 @@
 
       <div class="info-block">
         <div class="info-head">Delivery via Toast</div>
-        <div class="info-body">Use Toast for delivery instead of pickup.</div>
-        <a class="btn-secondary full" href="YOUR_TOAST_LINK_HERE">Continue in Toast →</a>
+        <div class="info-body">
+          Use Toast for delivery instead of pickup.
+        </div>
+        <a class="btn-secondary full" href="YOUR_TOAST_LINK_HERE">
+          Continue in Toast →
+        </a>
       </div>
     </section>
 
+    <!-- contact -->
     <section id="contact" class="block">
-<form
-  action="https://formspree.io/f/xanlylkl"
-  method="POST"
-  class="contact-card"
->
-  <h2 class="section-title no-gap">questions?</h2>
-  <p class="section-desc tight">
-    ask about bread, pickup windows, or gift items.
-  </p>
+      <form
+        action="https://formspree.io/f/xanlylkl"
+        method="POST"
+        class="contact-card"
+      >
+        <h2 class="section-title no-gap">questions?</h2>
+        <p class="section-desc tight">
+          ask about bread, pickup windows, or gift items.
+        </p>
 
-  <label class="form-field">
-    <span class="form-label">Your email</span>
-    <input class="input" type="email" name="email" required placeholder="you@example.com" />
-  </label>
+        <label class="form-field">
+          <span class="form-label">Your email</span>
+          <input
+            class="input"
+            type="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+          />
+        </label>
 
-  <label class="form-field">
-    <span class="form-label">Message</span>
-    <textarea class="input textarea" name="message" rows="4" required placeholder="type your message here"></textarea>
-  </label>
+        <label class="form-field">
+          <span class="form-label">Message</span>
+          <textarea
+            class="input textarea"
+            name="message"
+            rows="4"
+            required
+            placeholder="type your message here"
+          ></textarea>
+        </label>
 
-  <button class="btn-primary full" type="submit">Send</button>
-
-  <div class="form-foot">
-    handled securely by Formspree.
-  </div>
-</form>        
-      <h2 class="section-title no-gap">questions?</h2>
-        <p class="section-desc tight">Use this form for inquiries about bread, pickup, or gift items.</p>
-        <label class="form-field"><span class="form-label">Name</span><input class="input" name="name" required placeholder="your name"/></label>
-        <label class="form-field"><span class="form-label">Message</span><textarea class="input textarea" name="message" rows="4" required placeholder="your message"></textarea></label>
         <button class="btn-primary full" type="submit">Send</button>
+
+        <div class="form-foot">
+          handled securely by Formspree.
+        </div>
       </form>
     </section>
   </section>
 
+  <!-- cart sidebar -->
   <aside class="cart-col">
     <div class="cart-card">
-      <div class="cart-top"><div class="cart-head">Your Order</div><div class="cart-total">$<span id="cartTotal">0.00</span></div></div>
-      <div id="cartItems" class="cart-items empty-msg">Cart is empty.</div>
-      <a href="gift.html" class="btn-primary full alt-btn">Add gift items</a>
-      <a class="btn-checkout" href="YOUR_TOAST_LINK_HERE">Checkout with Toast →</a>
+      <div class="cart-top">
+        <div class="cart-head">Your Order</div>
+        <div class="cart-total">
+          $<span id="cartTotal">0.00</span>
+        </div>
+      </div>
+
+      <div id="cartItems" class="cart-items empty-msg">
+        Cart is empty.
+      </div>
+
+      <a href="gift.html" class="btn-primary full alt-btn">
+        Add gift items
+      </a>
+
+      <a class="btn-checkout" href="YOUR_TOAST_LINK_HERE">
+        Checkout with Toast →
+      </a>
     </div>
   </aside>
 </main>
