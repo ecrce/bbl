@@ -1,17 +1,9 @@
-// [Unverified] Simple cart logic stored in localStorage so index.html and gift.html
-// can see the same cart between pages. No backend, no payment logic.
-
 const CART_KEY = "ballardBreadLabCart";
 const WINDOW_KEY = "ballardBreadLabPickupWindow";
 
 function loadCart() {
-  try {
-    const raw = localStorage.getItem(CART_KEY);
-    if (!raw) return [];
-    return JSON.parse(raw);
-  } catch (e) {
-    return [];
-  }
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+  catch { return []; }
 }
 
 function saveCart(cart) {
@@ -32,12 +24,7 @@ function removeFromCart(index) {
 }
 
 function calcTotal(cart) {
-  let total = 0;
-  for (const item of cart) {
-    // price may be undefined; treat as 0
-    total += item.price ? Number(item.price) : 0;
-  }
-  return total;
+  return cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
 }
 
 function renderCart() {
@@ -51,42 +38,28 @@ function renderCart() {
     cartItemsEl.innerHTML = "Cart is empty.";
   } else {
     cartItemsEl.classList.remove("empty-msg");
-    cartItemsEl.innerHTML = cart
-      .map((item, idx) => {
-        return `
-        <div class="cart-line">
-          <div>
-            <div class="cart-line-title">${item.name}</div>
-            <div class="cart-line-sub">$${item.price} [Unverified]</div>
-          </div>
-          <button class="remove-btn" onclick="removeFromCart(${idx})">
-            remove
-          </button>
-        </div>`;
-      })
-      .join("");
+    cartItemsEl.innerHTML = cart.map((item, idx) => `
+      <div class="cart-line">
+        <div>
+          <div class="cart-line-title">${item.name}</div>
+          <div class="cart-line-sub">$${item.price.toFixed(2)}</div>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${idx})">remove</button>
+      </div>
+    `).join("");
   }
-
-  const total = calcTotal(cart).toFixed(2);
-  cartTotalEl.textContent = total;
+  cartTotalEl.textContent = calcTotal(cart).toFixed(2);
 }
 
-// pickup window selection
 function setPickupWindow(windowName) {
   localStorage.setItem(WINDOW_KEY, windowName);
 }
 
-// on load, render cart and sync pickup window highlight
 document.addEventListener("DOMContentLoaded", () => {
   renderCart();
-
   const storedWindow = localStorage.getItem(WINDOW_KEY);
   if (storedWindow) {
     const radios = document.querySelectorAll('input[name="pickupWindow"]');
-    radios.forEach(r => {
-      if (r.value === storedWindow) {
-        r.checked = true;
-      }
-    });
+    radios.forEach(r => { if (r.value === storedWindow) r.checked = true; });
   }
 });
