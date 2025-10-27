@@ -1,218 +1,75 @@
-/* cart + checkout logic for ballard bread lab */
+// script.js
 
-/* PUBLIC ENDPOINT for your Vercel backend API */
-const CHECKOUT_ENDPOINT = "https://bbl-liart.vercel.app/api/create-checkout";
+const BACKEND_BASE = "https://bbl-liart.vercel.app"; // <-- change to your deployed Vercel backend origin
 
-/* ---------------- CART STATE ---------------- */
-
-function loadCart() {
+async function refreshBatchInfo() {
   try {
-    const raw = localStorage.getItem("cart");
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
+    const res = await fetch(`${BACKEND_BASE}/api/orders`);
+    const data = await res.json();
 
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
+    // data.currentBatch = { startISO, readyISO, ovensUsed }
+    if (data && data.currentBatch) {
+      const start = new Date(data.currentBatch.startISO);
+      const ready = new Date(data.currentBatch.readyISO);
 
-function addToCart(name, price) {
-  const cart = loadCart();
-  cart.push({ name, price });
-  saveCart(cart);
-  renderCart();
-}
+      document.getElementById("batchStart").textContent =
+        start.toLocaleTimeString("en-US", {hour:"numeric",minute:"2-digit"});
+      document.getElementById("batchReady").textContent =
+        ready.toLocaleTimeString("en-US", {hour:"numeric",minute:"2-digit"});
 
-function removeFromCart(index) {
-  const cart = loadCart();
-  cart.splice(index, 1);
-  saveCart(cart);
-  renderCart();
-}
-
-function calcTotal(cart) {
-  return cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
-}
-
-/* ---------------- PICKUP WINDOW ---------------- */
-
-let selectedPickupWindow = {
-  code: "afternoon",
-  label: "Afternoon Batch",
-  time: "3 PM – 4 PM",
-  hint: "orders in before 12 PM"
-};
-
-function setPickupWindow(code) {
-  // midnight is allowed
-  const map = {
-    afternoon: {
-      label: "Afternoon Batch",
-      time: "3 PM – 4 PM",
-      hint: "orders in before 12 PM"
-    },
-    evening: {
-      label: "Evening Batch",
-      time: "6 PM – 7 PM",
-      hint: "orders in before 3 PM"
-    },
-    night: {
-      label: "Night Batch",
-      time: "9 PM – 10 PM",
-      hint: "orders in before 6 PM"
-    },
-    midnight: {
-      label: "Midnight Batch",
-      time: "12 AM – 1 AM",
-      hint: "pickup ok"
+      document.getElementById("ovensUsed").textContent =
+        data.currentBatch.ovensUsed ?? 0;
     }
-  };
-
-  if (!map[code]) return;
-
-  selectedPickupWindow = {
-    code,
-    label: map[code].label,
-    time: map[code].time,
-    hint: map[code].hint
-  };
-}
-
-function pickupWindowSummary() {
-  return `${selectedPickupWindow.label} | ${selectedPickupWindow.time}`;
-}
-
-/* ---------------- RENDER CART ---------------- */
-
-function renderCart() {
-  const cart = loadCart();
-  const cartItemsEl = document.getElementById("cartItems");
-  const totalEl = document.getElementById("cartTotal");
-
-  if (!cartItemsEl || !totalEl) return;
-
-  if (!cart.length) {
-    cartItemsEl.classList.add("empty-msg");
-    cartItemsEl.innerHTML = "Cart is empty.";
-    totalEl.textContent = "0.00";
-    return;
+  } catch (err) {
+    console.error("batch info error", err);
   }
-
-  cartItemsEl.classList.remove("empty-msg");
-
-  const lines = cart.map((item, idx) => {
-    return `
-      <div class="cart-line">
-        <div>
-          <div class="cart-line-title">${item.name}</div>
-          <div class="cart-line-sub">$${item.price.toFixed(2)}</div>
-        </div>
-        <button class="remove-btn" onclick="removeFromCart(${idx})">
-          remove
-        </button>
-      </div>
-    `;
-  }).join("");
-
-  cartItemsEl.innerHTML = lines;
-  totalEl.textContent = calcTotal(cart).toFixed(2);
 }
 
-/* ---------------- MODAL CONTROL ---------------- */
+// run once + poll
+refreshBatchInfo();
+setInterval(refreshBatchInfo, 60000);
 
-function hydratePayModal() {
-  const cart = loadCart();
-  const summaryWindowEl = document.getElementById("summaryWindow");
-  const summaryItemsEl = document.getElementById("summaryItems");
-  const summaryTotalEl = document.getElementById("summaryTotal");
+// handle order form
+const form = document.getElementById("orderForm");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  const windowStr = pickupWindowSummary();
+  const fd = new FormData(form);
+  const customerName = fd.get("customerName");
 
-  const itemsStr = cart.length
-    ? cart.map(i => `${i.name} - $${i.price.toFixed(2)}`).join("; ")
-    : "(cart empty)";
+  // loaf (radio)
+  const loafType = fd.get("loafType");
 
-  const totalStr = "$" + calcTotal(cart).toFixed(2);
+  // dips (checkboxes)
+  const extras = fd.getAll("extras"); // array of strings
 
-  if (summaryWindowEl) summaryWindowEl.textContent = windowStr;
-  if (summaryItemsEl) summaryItemsEl.textContent = itemsStr;
-  if (summaryTotalEl) summaryTotalEl.textContent = totalStr;
-}
-
-function openPayModal() {
-  const cart = loadCart();
-  if (!cart.length) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  hydratePayModal();
-
-  const modal = document.getElementById("payModal");
-  if (modal) modal.classList.remove("hidden");
-}
-
-function closePayModal() {
-  const modal = document.getElementById("payModal");
-  if (modal) modal.classList.add("hidden");
-}
-
-/* ---------------- CHECKOUT (STRIPE) ---------------- */
-
-async function checkoutStripe() {
-  const cart = loadCart();
-  if (!cart.length) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  const buyerName = document.getElementById("buyerName")?.value.trim() || "";
-  const buyerPhone = document.getElementById("buyerPhone")?.value.trim() || "";
-  const buyerEmail = document.getElementById("buyerEmail")?.value.trim() || "";
-
-  if (!buyerName || !buyerPhone || !buyerEmail) {
-    alert("Please fill name / phone / email.");
-    return;
-  }
-
+  // POST to backend to create stripe checkout
   const payload = {
-    items: cart.map(i => ({
-      name: i.name,
-      price: i.price
-    })),
-    pickupWindow: pickupWindowSummary(),
-    name: buyerName,
-    phone: buyerPhone,
-    email: buyerEmail
+    customerName,
+    loafType,
+    extras,
   };
 
   try {
-    const res = await fetch(CHECKOUT_ENDPOINT, {
+    const res = await fetch(`${BACKEND_BASE}/api/create-checkout-session`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
     });
 
     if (!res.ok) {
-      alert("Checkout unavailable.");
+      alert("error creating checkout");
       return;
     }
 
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
+    const out = await res.json();
+    if (out && out.url) {
+      window.location.href = out.url;
     } else {
-      alert("Checkout error.");
+      alert("no checkout url");
     }
   } catch (err) {
-    alert("Network error.");
+    console.error(err);
+    alert("checkout failed");
   }
-}
-
-/* ---------------- INIT ---------------- */
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCart();
 });
