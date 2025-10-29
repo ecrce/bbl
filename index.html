@@ -2,137 +2,198 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ballard Bread Lab – Bake-to-Order Loaves</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>ballard bread lab · late night pickup</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", sans-serif;
+      background-color: #0f0f10;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.4;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #1a1a1d;
+      border: 1px solid #2a2a2f;
+      border-radius: 1rem;
+      padding: 1.5rem 1.5rem 2rem;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 .4rem;
+    }
+
+    .subtitle {
+      font-size: .9rem;
+      color: #a5a5a5;
+      margin: 0 0 1rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+      font-size: .95rem;
+    }
+
+    .item-name {
+      color: #fff;
+      font-weight: 500;
+      max-width: 70%;
+    }
+
+    .item-price {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    label {
+      font-size: .8rem;
+      color: #ccc;
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      background-color: #0f0f10;
+      color: #fff;
+      border: 1px solid #3a3a42;
+      border-radius: .5rem;
+      padding: .6rem .75rem;
+      font-size: .9rem;
+      outline: none;
+    }
+
+    input[type="email"]:focus {
+      border-color: #888;
+    }
+
+    .btn-checkout {
+      appearance: none;
+      border: 0;
+      border-radius: .6rem;
+      width: 100%;
+      margin-top: 1rem;
+      padding: .8rem 1rem;
+      font-size: .95rem;
+      font-weight: 600;
+      line-height: 1.2;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .btn-checkout:disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: .75rem;
+      line-height: 1.4;
+      color: #7a7a7a;
+    }
+
+    .error {
+      margin-top: .75rem;
+      font-size: .8rem;
+      color: #ff6b6b;
+      min-height: 1em;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1 class="brand">ballard bread lab</h1>
-    <p class="tagline">baked to order • zero waste • pickup at the side door near Market &amp; 15th</p>
-  </header>
+  <main class="card">
+    <h1>ballard bread lab · late night pickup</h1>
+    <p class="subtitle">
+      fresh loaf, delivery / hand-off only. no storefront.
+    </p>
 
-  <main class="layout">
+    <div class="price-row">
+      <div class="item-name">1× house loaf / midnight batch</div>
+      <div class="item-price">$20.00</div>
+    </div>
 
-    <!-- Batch / Oven Status -->
-    <section class="card">
-      <h2 class="section-title">next batch status</h2>
-      <p class="small">
-        we bake in tiny batches (5 ovens). each loaf takes ~3h10m start to finish.
-      </p>
+    <div style="margin-bottom:1rem;">
+      <label for="email">Contact email (receipt + pickup window)</label>
+      <input id="email" type="email" placeholder="you@example.com" />
+    </div>
 
-      <div id="batchInfo" class="batch-box">
-        <div class="batch-line">
-          <span class="label">current batch:</span>
-          <span id="batchStart"></span> → ready <span id="batchReady"></span>
-        </div>
-        <div class="batch-line">
-          <span class="label">ovens reserved:</span>
-          <span id="ovensUsed"></span> / 5
-        </div>
-        <div class="batch-line">
-          <span class="label">pickup:</span>
-          <span>side door (see address below)</span>
-        </div>
-      </div>
-    </section>
+    <button id="checkoutBtn" class="btn-checkout">Pay with card</button>
 
-    <!-- Order Form -->
-    <section class="card">
-      <h2 class="section-title">reserve a loaf</h2>
+    <div id="errorMsg" class="error"></div>
 
-      <form id="orderForm" class="order-form">
-
-        <!-- customer name -->
-        <label class="field">
-          <span class="field-label">your name (for label + pickup)</span>
-          <input required name="customerName" class="input" placeholder="first name / nickname ok"/>
-        </label>
-
-        <!-- loaf choice -->
-        <fieldset class="field">
-          <legend class="field-label">choose your loaf</legend>
-
-          <label class="radio-row">
-            <input type="radio" name="loafType" value="Herbed Loaf" data-price="700" required>
-            <div class="radio-info">
-              <div class="radio-name">Herbed loaf</div>
-              <div class="radio-desc">$7 launch (will be $8)</div>
-              <div class="radio-notes">olive oil, herbs, soft interior</div>
-            </div>
-          </label>
-
-          <label class="radio-row">
-            <input type="radio" name="loafType" value="Night Chocolate Fig" data-price="800">
-            <div class="radio-info">
-              <div class="radio-name">Night Chocolate Fig</div>
-              <div class="radio-desc">$8 launch (will be $9)</div>
-              <div class="radio-notes">dark, sweet, late-night energy bread</div>
-            </div>
-          </label>
-
-          <label class="radio-row">
-            <input type="radio" name="loafType" value="Ballard Biscocho" data-price="950">
-            <div class="radio-info">
-              <div class="radio-name">Ballard Biscocho</div>
-              <div class="radio-desc">$9.50 launch (will be $11)</div>
-              <div class="radio-notes">our signature soft bread, island style</div>
-            </div>
-          </label>
-        </fieldset>
-
-        <!-- dips -->
-        <fieldset class="field">
-          <legend class="field-label">add dips (4 oz)</legend>
-
-          <label class="check-row">
-            <input type="checkbox" name="extras" value="Olive & Carrot Tapenade" data-price="350">
-            <div class="check-info">
-              <div class="check-name">olive & carrot tapenade</div>
-              <div class="check-desc">$3.50 launch (will be $4)</div>
-              <div class="check-notes">savory spread for herbed loaf</div>
-            </div>
-          </label>
-
-          <label class="check-row">
-            <input type="checkbox" name="extras" value="Sweet Milk Dip" data-price="300">
-            <div class="check-info">
-              <div class="check-name">sweet milk dip</div>
-              <div class="check-desc">$3.00 launch (will be $3.50)</div>
-              <div class="check-notes">condensed milk style dip for night breads</div>
-            </div>
-          </label>
-        </fieldset>
-
-        <!-- submit -->
-        <button class="submit-btn" type="submit">
-          reserve & pay
-        </button>
-
-        <p class="fine">
-          you’ll be sent to checkout. after payment we text/whatsapp/email the baker instantly.
-        </p>
-
-      </form>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">pickup / delivery window</h2>
-      <p class="small">
-        first batch mixes ~9am. each bake takes ~3h10m. last drop is ~1am.
-        we message you when your loaf is in the oven + when it’s ready.
-      </p>
-      <p class="small">
-        pickup spot: side door at the address shown on this site.
-      </p>
-    </section>
-
-    <footer class="footer">
-      <div class="tiny">ballard bread lab / micro-batch / zero waste / launch pricing</div>
-    </footer>
-
+    <p class="note">
+      after payment we email you, confirm timing, and meet up discreet
+      (ballard / magnolia late night). no walk-ups.
+    </p>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    async function startCheckout() {
+      const btn = document.getElementById('checkoutBtn');
+      const emailInput = document.getElementById('email');
+      const errorBox = document.getElementById('errorMsg');
+
+      errorBox.textContent = '';
+      btn.disabled = true;
+
+      const email = emailInput.value.trim();
+
+      // Single fixed product for now
+      const cart = [
+        {
+          name: "ballard bread lab · late night pickup",
+          price: 20.00
+        }
+      ];
+
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            items: cart,
+            email
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          // Send buyer to Stripe Checkout
+          window.location.href = data.url;
+        } else {
+          errorBox.textContent =
+            (data.error && data.error.message) || 'checkout error';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        errorBox.textContent = err.message || 'network error';
+        btn.disabled = false;
+      }
+    }
+
+    document
+      .getElementById('checkoutBtn')
+      .addEventListener('click', startCheckout);
+  </script>
 </body>
 </html>
