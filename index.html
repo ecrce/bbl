@@ -2,198 +2,318 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <title>ballard bread lab · late night pickup</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, "Helvetica Neue", sans-serif;
-      background-color: #0f0f10;
-      color: #f5f5f5;
-      margin: 0;
-      padding: 2rem;
-      line-height: 1.4;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    .card {
-      background-color: #1a1a1d;
-      border: 1px solid #2a2a2f;
-      border-radius: 1rem;
-      padding: 1.5rem 1.5rem 2rem;
-      max-width: 380px;
-      width: 100%;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    }
-
-    h1 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #fff;
-      margin: 0 0 .4rem;
-    }
-
-    .subtitle {
-      font-size: .9rem;
-      color: #a5a5a5;
-      margin: 0 0 1rem;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1rem;
-      font-size: .95rem;
-    }
-
-    .item-name {
-      color: #fff;
-      font-weight: 500;
-      max-width: 70%;
-    }
-
-    .item-price {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    label {
-      font-size: .8rem;
-      color: #ccc;
-      display: block;
-      margin-bottom: .4rem;
-    }
-
-    input[type="email"] {
-      width: 100%;
-      background-color: #0f0f10;
-      color: #fff;
-      border: 1px solid #3a3a42;
-      border-radius: .5rem;
-      padding: .6rem .75rem;
-      font-size: .9rem;
-      outline: none;
-    }
-
-    input[type="email"]:focus {
-      border-color: #888;
-    }
-
-    .btn-checkout {
-      appearance: none;
-      border: 0;
-      border-radius: .6rem;
-      width: 100%;
-      margin-top: 1rem;
-      padding: .8rem 1rem;
-      font-size: .95rem;
-      font-weight: 600;
-      line-height: 1.2;
-      background: #fff;
-      color: #000;
-      cursor: pointer;
-    }
-
-    .btn-checkout:disabled {
-      background: #444;
-      color: #888;
-      cursor: not-allowed;
-    }
-
-    .note {
-      margin-top: 1rem;
-      font-size: .75rem;
-      line-height: 1.4;
-      color: #7a7a7a;
-    }
-
-    .error {
-      margin-top: .75rem;
-      font-size: .8rem;
-      color: #ff6b6b;
-      min-height: 1em;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <main class="card">
-    <h1>ballard bread lab · late night pickup</h1>
-    <p class="subtitle">
-      fresh loaf, delivery / hand-off only. no storefront.
-    </p>
+  <div class="page-shell">
 
-    <div class="price-row">
-      <div class="item-name">1× house loaf / midnight batch</div>
-      <div class="item-price">$20.00</div>
+    <!-- MAIN CONTENT -->
+    <main class="main-col">
+      <header class="hero-block card-surface">
+        <div class="hero-head">
+          <h1 class="hero-title">ballard bread lab · late night pickup</h1>
+          <p class="hero-sub">
+            fresh bread, off-hours hand-off only.<br />
+            no storefront. no walk-ups.
+          </p>
+        </div>
+
+        <div class="hero-note">
+          choose what you want, pick a window, pay. we email/text you with the meet-up spot.
+        </div>
+      </header>
+
+      <!-- MENU / PRODUCTS -->
+      <section class="menu-block card-surface">
+        <h2 class="section-title">loaves</h2>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Midnight Herb Loaf</div>
+            <div class="product-desc">
+              classic sour / herb oil finish. baked for the midnight batch.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$20.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Midnight Herb Loaf', 20.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Garlic / Olive Oil Loaf</div>
+            <div class="product-desc">
+              fermented garlic / cold olive oil finish.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$20.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Garlic / Olive Oil Loaf', 20.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Sweet Loaf (cinnamon/vanilla)</div>
+            <div class="product-desc">
+              late batch pull-apart. cinnamon / vanilla / butter.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$20.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Sweet Loaf (cinnamon/vanilla)', 20.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-block card-surface">
+        <h2 class="section-title">extras</h2>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Mini Flashlight (silver)</div>
+            <div class="product-desc">
+              tiny aluminum keychain light for late hand-offs.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$6.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Mini Flashlight (silver)', 6.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Mini Flashlight (black)</div>
+            <div class="product-desc">
+              matte black, same lumen output.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$6.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Mini Flashlight (black)', 6.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Crew Socks (black/white logo)</div>
+            <div class="product-desc">
+              mid-calf, heavy knit. stitched mark.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$12.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Crew Socks (black/white logo)', 12.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <div class="product-info">
+            <div class="product-name">Crew Socks (gray/white logo)</div>
+            <div class="product-desc">
+              mid-calf, gray weave. stitched mark.
+            </div>
+          </div>
+          <div class="product-cta">
+            <div class="product-price">$12.00</div>
+            <button
+              class="btn-add"
+              onclick="addToCart('Crew Socks (gray/white logo)', 12.00)"
+            >
+              add
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PICKUP WINDOW SELECTION -->
+      <section class="pickup-block card-surface">
+        <h2 class="section-title">pickup window</h2>
+
+        <div class="pickup-row">
+          <button
+            class="pickup-option"
+            onclick="setPickupWindow('midnight')"
+          >
+            <div class="pickup-main">
+              <div class="pickup-label">Midnight Batch</div>
+              <div class="pickup-time">12 AM – 1 AM</div>
+            </div>
+            <div class="pickup-hint">
+              usually ballard / magnolia waterfront hand-off
+            </div>
+          </button>
+        </div>
+
+        <div class="pickup-row">
+          <button
+            class="pickup-option"
+            onclick="setPickupWindow('dawn')"
+          >
+            <div class="pickup-main">
+              <div class="pickup-label">Dawn Batch</div>
+              <div class="pickup-time">5 AM – 6 AM</div>
+            </div>
+            <div class="pickup-hint">
+              early hand-off, fewer people around
+            </div>
+          </button>
+        </div>
+
+        <div class="pickup-row">
+          <button
+            class="pickup-option"
+            onclick="setPickupWindow('noon')"
+          >
+            <div class="pickup-main">
+              <div class="pickup-label">Noon Batch</div>
+              <div class="pickup-time">12 PM – 1 PM</div>
+            </div>
+            <div class="pickup-hint">
+              casual hand-off, more public
+            </div>
+          </button>
+        </div>
+
+        <div class="pickup-current">
+          <div class="pickup-current-head">selected window:</div>
+          <div id="pickupChoiceLabel" class="pickup-current-main">
+            Midnight Batch | 12 AM – 1 AM
+          </div>
+          <div id="pickupChoiceHint" class="pickup-current-hint">
+            usually ballard / magnolia waterfront hand-off
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- CART SIDEBAR -->
+    <aside class="cart-col">
+      <div class="cart-inner card-surface">
+        <div class="cart-head">
+          <div class="cart-title">your bag</div>
+          <button class="cart-close-btn" onclick="closeCart()">×</button>
+        </div>
+
+        <div id="cartItems" class="cart-items empty-msg">
+          Cart is empty.
+        </div>
+
+        <div class="cart-total-row">
+          <div class="cart-total-label">total</div>
+          <div class="cart-total-val">$<span id="cartTotal">0.00</span></div>
+        </div>
+
+        <button class="btn-primary" onclick="openPayModal()">
+          pay / confirm
+        </button>
+      </div>
+    </aside>
+
+    <!-- FLOATING CART BUTTON -->
+    <button class="fab-cart" onclick="openCart()">
+      👜
+    </button>
+
+    <!-- PAY MODAL -->
+    <div id="payModal" class="modal hidden">
+      <div class="modal-backdrop" onclick="closePayModal()"></div>
+
+      <div class="modal-panel card-surface">
+        <div class="modal-head">
+          <div class="modal-title">confirm + pay</div>
+          <button class="modal-x" onclick="closePayModal()">×</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-field">
+            <label for="buyerName">name</label>
+            <input
+              id="buyerName"
+              type="text"
+              placeholder="your name"
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="buyerPhone">phone (for pickup)</label>
+            <input
+              id="buyerPhone"
+              type="tel"
+              placeholder="000-000-0000"
+              autocomplete="tel"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="buyerEmail">email (receipt)</label>
+            <input
+              id="buyerEmail"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="pickup-summary-block">
+            <div class="pickup-summary-head">pickup window</div>
+            <div class="pickup-summary-main" id="pickupSummaryText">
+              <span id="pickupChoiceLabelModal">Midnight Batch | 12 AM – 1 AM</span>
+            </div>
+            <div class="pickup-summary-hint" id="pickupChoiceHintModal">
+              usually ballard / magnolia waterfront hand-off
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-foot">
+          <button class="btn-primary wide" onclick="checkoutStripe()">
+            pay with card
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div style="margin-bottom:1rem;">
-      <label for="email">Contact email (receipt + pickup window)</label>
-      <input id="email" type="email" placeholder="you@example.com" />
-    </div>
-
-    <button id="checkoutBtn" class="btn-checkout">Pay with card</button>
-
-    <div id="errorMsg" class="error"></div>
-
-    <p class="note">
-      after payment we email you, confirm timing, and meet up discreet
-      (ballard / magnolia late night). no walk-ups.
-    </p>
-  </main>
-
-  <script>
-    async function startCheckout() {
-      const btn = document.getElementById('checkoutBtn');
-      const emailInput = document.getElementById('email');
-      const errorBox = document.getElementById('errorMsg');
-
-      errorBox.textContent = '';
-      btn.disabled = true;
-
-      const email = emailInput.value.trim();
-
-      // Single fixed product for now
-      const cart = [
-        {
-          name: "ballard bread lab · late night pickup",
-          price: 20.00
-        }
-      ];
-
-      try {
-        const res = await fetch('/api/create-checkout', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            items: cart,
-            email
-          })
-        });
-
-        const data = await res.json();
-
-        if (data.url) {
-          // Send buyer to Stripe Checkout
-          window.location.href = data.url;
-        } else {
-          errorBox.textContent =
-            (data.error && data.error.message) || 'checkout error';
-          btn.disabled = false;
-        }
-      } catch (err) {
-        errorBox.textContent = err.message || 'network error';
-        btn.disabled = false;
-      }
-    }
-
-    document
-      .getElementById('checkoutBtn')
-      .addEventListener('click', startCheckout);
-  </script>
+  </div>
 </body>
 </html>
